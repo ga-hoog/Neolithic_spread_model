@@ -20,13 +20,13 @@ pip3 install scipy numpy matplotlib f2py
 
 # Getting Started
 
-Before running the program the fortran libraries need to be compiled using f2py.
+Before running the program, the fortran libraries need to be compiled for use in the python code using f2py.
 This is easily done using the command:
 ```
 make compile
 ```
 
-From here to run the simulation run:
+From here to run the simulation can be run using the command:
 ```
 python3 Simulation.py
 ```
