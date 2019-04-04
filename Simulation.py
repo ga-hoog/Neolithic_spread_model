@@ -252,8 +252,8 @@ class Simulation:
         ax3=  axes[1,0]
         ax4=  axes[1,1]
 
-        self.matrice1 = ax1.matshow(self.pop_1, vmax = 10)
-        self.matrice2 = ax2.matshow(self.pop_2, vmax = 10)
+        self.matrice1 = ax1.matshow(self.pop_1, vmax = 5)
+        self.matrice2 = ax2.matshow(self.pop_2, vmax = 5)
         self.matrice3 = ax3.matshow(-self.Nj_1, vmax = 10, vmin = -10)
         self.matrice4 = ax4.matshow(-self.Nj_2, vmax = 10, vmin = -10)
 

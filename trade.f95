@@ -9,7 +9,6 @@ subroutine calctrade(i_size, j_size, pop_1_array, cap_1_array, filter, trade_1_d
   integer :: x, y, i, j, k, l
 
   filter_size = shape(filter)
-  ! write(*,*) filter
   ! Every grid location
   do i = 0, i_size-1
     do j = 0, j_size-1
@@ -38,7 +37,6 @@ subroutine calctrade(i_size, j_size, pop_1_array, cap_1_array, filter, trade_1_d
                 ! influence = filter(y-i,x-j) * local * (1 - (local/foreign))
                 ! Check if this is the largest influence
                 if (influence > max) then
-                  ! write(*,*) influence
                   max = influence
                   args(1) = y
                   args(2) = x
@@ -47,32 +45,17 @@ subroutine calctrade(i_size, j_size, pop_1_array, cap_1_array, filter, trade_1_d
             end if
           end do
         end do
-        ! Check if the trade transfer amount is larger than the cap
-        ! if (cap_1_array(1+i,1+j) < 0) then
-        !   write(*,*) cap_1_array(1+i,1+j)
-        ! end if
-        ! if (max>0) then
-        !   write(*,*) max, cap_1_array(args(1), args(2))
-        ! end if
-        ! max = max * pop_1_array(1+i, 1+j)
 
+        ! Check if the trade transfer amount is larger than the cap
         if (max>cap_1_array(1+i,1+j)) then
-          ! write(*,*) max, cap_1_array(i+1,j+1)
           max = - cap_1_array(i+1,j+1)
         end if
-        ! Once the greatest influencor is found, transfer trade
+        ! Once the greatest influencer is found, transfer trade
         trade_1_del(1+i,1+j) = trade_1_del(1+i,1+j) - max
         trade_1_del(args(1),args(2)) = trade_1_del(args(1),args(2)) + max
         arguments(1,1+i,1+j) = args(1)
         arguments(2,1+i,1+j) = args(2)
-        ! if (max /= 0) then
-          ! write(*,*) trade_1_del(1+i,1+j), trade_1_del(args(1),args(2))
-          ! write(*,*) 1+i, 1+j, args, max
-        ! end if
       end if
     end do
   end do
-  ! write(*,*) "SUM",sum(trade_1_del)
-  ! write(*,*) "SUM CAP", sum(cap_1_array)
-  ! write(*,*) cap_1_array
 end subroutine calctrade
